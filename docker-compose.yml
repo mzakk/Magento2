@@ -1,10 +1,23 @@
 version: '2'
 services:
+  varnish:
+    build:
+      context: ./dockervarnish/docker-varnish
+    ports:
+      - "80:80"
+    networks:
+      - magento2-network
+    links:
+      - apache
+    volumes:
+     - ./varnish/default.vcl:/etc/varnish/default.vcl
+
+  #add this name to /varnish/default.vcl backend host
   apache:
     image: rafaelcgstz/magento2
     # build: .
     ports:
-      - "80:80" # web
+      - "8000:80" # web
       - "9001:9000" # xdebug
       # - "35729:35729" # live reload
     volumes:
