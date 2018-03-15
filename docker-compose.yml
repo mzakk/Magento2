@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
     networks:
-      - <project_name>
+      - <project_name>-network
     links:
       - apache
     volumes:
